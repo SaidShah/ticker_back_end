@@ -6,7 +6,7 @@ class AuthController < ApplicationController
     if user && user.authenticate(userParams[:password])
       token = JWT.encode({user_id: user.id}, "SECRET")
       render json: {user: user, jwt: token}
-      
+
     else
       render json: {error: "wrong username or password"},status: 400
     end
