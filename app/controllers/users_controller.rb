@@ -7,9 +7,12 @@ class UsersController < ApplicationController
 
   def create
       @user = User.create(createUserParams)
+
       if @user.valid?
-        token= JWT.encode({user_id: @user.id}, '')
+        token= JWT.encode({user_id: @user.id}, 'SECRET')
+        Account.create(user_id: @user.id, total_funds: "10000")
         render json: {user: @user, jwt: token}
+
       else
         render json: {error: "WRONG"},status: 422
       end
