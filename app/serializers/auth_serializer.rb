@@ -1,3 +1,3 @@
 class AuthSerializer < ActiveModel::Serializer
-  attributes :id
+  # attributes :id, :username, :password, :current_user
 end
