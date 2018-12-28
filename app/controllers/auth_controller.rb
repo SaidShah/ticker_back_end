@@ -13,9 +13,9 @@ class AuthController < ApplicationController
   end
 
   def show
-
+    
     current_user =  User.find(JWT.decode(request.authorization,"SECRET")[0]["user_id"])
-    render json: {user: current_user}
+     render json: {user: current_user, jwt: request.authorization}
     # if current_user
     #   render json: {user: current_user}
     # else
