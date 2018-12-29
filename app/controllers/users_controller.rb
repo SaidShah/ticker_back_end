@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
 
-  # def index
-  #   @users = User.all
-  #
-  #   render json: @users
-  # end
+  def index
+    render json: User.includes(:account, :stocks), include: ["account", "stocks"]
+  end
 
   def create
       @user = User.create(createUserParams)
