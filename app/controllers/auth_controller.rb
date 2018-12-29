@@ -15,20 +15,8 @@ class AuthController < ApplicationController
   def show
 
     current_user =  User.find(JWT.decode(request.authorization,"SECRET")[0]["user_id"])
-
-
     user= {
-      id: current_user.id,
-      user_name: current_user.username,
-      email: current_user.email,
-      first_name: current_user.first_name,
-      last_name: current_user.last_name,
-      house_number: current_user.house_number,
-      street_name: current_user.street_name,
-      city: current_user.city,
-      state: current_user.state,
-      zipcode: current_user.zipcode,
-      date_of_birth: current_user.date_of_birth,
+      person: current_user,
       account: current_user.account,
       stocks: current_user.stocks
     }

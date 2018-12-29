@@ -10,7 +10,8 @@ class UsersController < ApplicationController
       if @user.valid?
         token= JWT.encode({user_id: @user.id}, 'SECRET')
         Account.create(user_id: @user.id, total_funds: "10000")
-        render json: {user: @user, jwt: token}
+        @newUser = {user: @user, account: @user.account, stocks: @user.stocks}
+        render json: {user: @newUser, jwt: token}
 
       else
         render json: {error: "WRONG"},status: 422
