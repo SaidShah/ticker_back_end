@@ -21,7 +21,6 @@ class AuthController < ApplicationController
       stocks: current_user.stocks
     }
       render json: {user: user, jwt: request.authorization}
-
   end
 
   private
