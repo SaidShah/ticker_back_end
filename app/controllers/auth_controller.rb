@@ -2,11 +2,16 @@ class AuthController < ApplicationController
 
   def create
 
-    user = User.find_by(username: userParams[:username])
-    if user && user.authenticate(userParams[:password])
-      token = JWT.encode({user_id: user.id}, "SECRET")
+    @user = User.find_by(username: userParams[:username])
+    if @user && @user.authenticate(userParams[:password])
+      token = JWT.encode({user_id: @user.id}, "SECRET")
+      newUser= {
+        person: @user,
+        account: @user.account,
+        stocks: @user.stocks
+      }
 
-      render json: {user: user, jwt: token}
+      render json: {user: newUser, jwt: token}
     else
       render json: {error: "wrong username or password"},status: 400
     end
