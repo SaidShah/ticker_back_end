@@ -4,6 +4,10 @@ class UsersController < ApplicationController
     render json: User.includes(:account, :stocks), include: ["account", "stocks"]
   end
 
+  def show
+    
+  end
+
   def create
       @user = User.create(createUserParams)
 
