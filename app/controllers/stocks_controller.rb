@@ -20,10 +20,26 @@ class StocksController < ApplicationController
 
   def create
     @user = User.find(create_stock[:user_id])
-    @newStock = Stock.create(symbol: create_stock[:symbol],total_quantity: create_stock[:quantity], total_value: create_stock[:total_value], purchase_price: create_stock[:purchase_price])
-    UserStock.create(user_id: create_stock[:user_id], stock_id: @newStock.id)
+    @account = @user.account
+    @account.total_funds = create_stock[:total_funds]
+    @stock = @user.stocks.find_by(symbol: create_stock[:symbol])
+    if(@stock)
+      new_quantity = @stock.total_quantity.to_i + create_stock[:quantity]
+      new_value = @stock.total_value.to_f + create_stock[:total_value].to_f
+      @stock.total_quantity = new_quantity
+      @stock.total_value = new_value
+      @user.save
+      @account.save
+      @stock.save
+    else
+      @newStock = Stock.create(symbol: create_stock[:symbol],total_quantity: create_stock[:quantity], total_value: create_stock[:total_value], purchase_price: create_stock[:purchase_price])
+      @user.save
+      @account.save
+      UserStock.create(user_id: create_stock[:user_id], stock_id: @newStock.id)
+
+   end
     render json: @user
-    
+
   end
 
 
