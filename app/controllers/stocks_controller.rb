@@ -9,6 +9,7 @@ class StocksController < ApplicationController
     @stock.save
     @account.save
     @user.save
+    
     updatedUser={
       person: @user,
       stocks: @user.stocks,
