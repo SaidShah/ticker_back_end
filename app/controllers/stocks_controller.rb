@@ -9,13 +9,17 @@ class StocksController < ApplicationController
     @stock.save
     @account.save
     @user.save
-    
+
     updatedUser={
       person: @user,
       stocks: @user.stocks,
       account: @user.account
     }
     render json: updatedUser
+  end
+
+  def create
+    byebug
   end
 
 
