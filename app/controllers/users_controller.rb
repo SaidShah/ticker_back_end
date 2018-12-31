@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def create
@@ -21,12 +21,14 @@ class UsersController < ApplicationController
         render json: {error: "WRONG"},status: 422
       end
 
+    
+
   end
 
 private
 
 def createUserParams
-  params.require(:user).permit(:first_name,:last_name,:house_number,:street_name,:city,:state,:zipcode,:date_of_birth,:username,:password,:email)
+  params.require(:user).permit(:user_id,:stock_id, :first_name,:last_name,:house_number,:street_name,:city,:state,:zipcode,:date_of_birth,:username,:password,:email)
 end
 
 end
