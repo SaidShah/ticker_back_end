@@ -28,9 +28,9 @@ class StocksController < ApplicationController
       new_value = @stock.total_value.to_f + create_stock[:total_value].to_f
       @stock.total_quantity = new_quantity
       @stock.total_value = new_value
-      @user.save
       @account.save
       @stock.save
+      @user.save
     else
       @newStock = Stock.create(symbol: create_stock[:symbol],total_quantity: create_stock[:quantity], total_value: create_stock[:total_value], purchase_price: create_stock[:purchase_price])
       @user.save
