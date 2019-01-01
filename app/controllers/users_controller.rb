@@ -8,6 +8,19 @@ class UsersController < ApplicationController
 
   end
 
+  def update
+    @user = User.find(createUserParams[:user_id])
+    @user.update(first_name: createUserParams[:first_name], last_name: createUserParams[:last_name],house_number: createUserParams[:house_number],street_name: createUserParams[:street_name],city: createUserParams[:city],state: createUserParams[:state],zipcode: createUserParams[:zipcode],date_of_birth: createUserParams[:date_of_birth],username: createUserParams[:username],email: createUserParams[:email])
+    @user.save
+    newUser= {
+      person: @user,
+      account: @user.account,
+      stocks: @user.stocks
+    }
+
+    render json: newUser
+  end
+
   def create
       @user = User.create(createUserParams)
 
@@ -21,7 +34,7 @@ class UsersController < ApplicationController
         render json: {error: "WRONG"},status: 422
       end
 
-    
+
 
   end
 
