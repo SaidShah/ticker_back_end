@@ -1,4 +1,5 @@
 class StocksController < ApplicationController
+
   def update
     @user = User.find(new_stock_values[:user_id])
     @stock = @user.stocks.find(new_stock_values[:stock_id])
@@ -6,11 +7,10 @@ class StocksController < ApplicationController
     @stock.total_quantity = new_stock_values[:new_stock_count]
     @stock.total_value = new_stock_values[:new_value_for_stock]
     @account.total_funds = new_stock_values[:new_account_balance]
-    
     @stock.save
     @account.save
     @user.save
-
+    @stock.checkTotalStocks(@user, @stock, @account)
     updatedUser={
       person: @user,
       stocks: @user.stocks,

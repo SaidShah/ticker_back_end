@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users do
    resources :stocks
   end
-
+ 
   get '/current_user', to: "auth#show"
   post '/login', to: "auth#create"
 end
